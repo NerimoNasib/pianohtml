@@ -1,15 +1,35 @@
+let audioCtx;
+let gainNode;
+let volumeSlider;
+
+function initAudio() {
+  // Create AudioContext upon user interaction
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  gainNode = audioCtx.createGain();
+  gainNode.connect(audioCtx.destination);
+
+  // Initialize volume slider
+  volumeSlider = document.getElementById('volumeSlider');
+  volumeSlider.addEventListener('input', function() {
+    updateVolume(this.value);
+  });
+}
+
+function updateVolume(volume) {
+  // Set the gain value based on the volume slider
+  gainNode.gain.value = volume;
+}
+
 function generateSineWave(frequency, duration, vol) {
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const sampleRate = audioCtx.sampleRate;
-  const numberOfSamples = Math.ceil(sampleRate * duration);
-  const buffer = audioCtx.createBuffer(1, numberOfSamples, sampleRate);
+  const numberOfSamples = Math.ceil(audioCtx.sampleRate * duration);
+  const buffer = audioCtx.createBuffer(1, numberOfSamples, audioCtx.sampleRate);
   const data = buffer.getChannelData(0);
-  const volumeDecayRate = Math.pow(0.01, 1 / (sampleRate * duration));
+  const volumeDecayRate = Math.pow(0.01, 1 / (audioCtx.sampleRate * duration));
 
   let volume = vol;
 
   for (let i = 0; i < numberOfSamples; i++) {
-    const t = i / sampleRate;
+    const t = i / audioCtx.sampleRate;
     const amplitude = Math.sin(2 * Math.PI * frequency * t) * volume;
 
     data[i] = amplitude;
@@ -18,7 +38,10 @@ function generateSineWave(frequency, duration, vol) {
 
   const source = audioCtx.createBufferSource();
   source.buffer = buffer;
-  source.connect(audioCtx.destination);
+
+  // Connect the source to the gain node
+  source.connect(gainNode);
+
   source.start();
 
   setTimeout(() => {
@@ -27,7 +50,7 @@ function generateSineWave(frequency, duration, vol) {
 }
 
 function playNote(frequency) {
-  const vol = 0.5; // Adjust the volume as needed
-  const duration = 2; // Adjust the duration as needed
+  const vol = volumeSlider.value;
+  const duration = 2;
   generateSineWave(frequency, duration, vol);
 }
