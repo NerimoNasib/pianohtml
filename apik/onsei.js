@@ -3,12 +3,10 @@ let gainNode;
 let volumeSlider;
 
 function initAudio() {
-  // Create AudioContext upon user interaction
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   gainNode = audioCtx.createGain();
   gainNode.connect(audioCtx.destination);
 
-  // Initialize volume slider
   volumeSlider = document.getElementById('volumeSlider');
   volumeSlider.addEventListener('input', function() {
     updateVolume(this.value);
@@ -16,7 +14,6 @@ function initAudio() {
 }
 
 function updateVolume(volume) {
-  // Set the gain value based on the volume slider
   gainNode.gain.value = volume;
 }
 
@@ -39,7 +36,6 @@ function generateSineWave(frequency, duration, vol) {
   const source = audioCtx.createBufferSource();
   source.buffer = buffer;
 
-  // Connect the source to the gain node
   source.connect(gainNode);
 
   source.start();
