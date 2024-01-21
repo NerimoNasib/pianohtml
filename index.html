@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chromatic Key Buttons</title>
+  <title>デジタルピアノ</title>
   <link rel="stylesheet" href="apik/style.css">
   <script src="apik/onsei.js"></script> 
 </head>
 <body>
+  <h1 id="title">デジタルピアノ</h1>
+
+  <main class="container">
   <!-- C3 Range -->
-  <div class="key white-key" id="c" onclick="playNote(130.81)">
+    <div class="key white-key" id="c" onclick="playNote(130.81)">
     <div>C</div>
   </div>
   <div class="key black-key" id="c-sharp" onclick="playNote(138.59)">
@@ -34,13 +37,13 @@
     <div>G</div>
   </div>
   <div class="key black-key" id="g-sharp" onclick="playNote(207.65)">
-    <div>G#</div>
+    <div>A♭</div>
   </div>
   <div class="key white-key" id="a" onclick="playNote(220.00)">
     <div>A</div>
   </div>
   <div class="key black-key" id="a-sharp" onclick="playNote(233.08)">
-    <div>A#</div>
+    <div>B♭</div>
   </div>
   <div class="key white-key" id="b" onclick="playNote(246.94)">
     <div>B</div>
@@ -71,13 +74,13 @@
     <div>G</div>
   </div>
   <div class="key black-key" id="g-sharp" onclick="playNote(415.30)">
-    <div>G#</div>
+    <div>A♭</div>
   </div>
   <div class="key white-key" id="a" onclick="playNote(440.00)">
     <div>A</div>
   </div>
   <div class="key black-key" id="a-sharp" onclick="playNote(466.16)">
-    <div>A#</div>
+    <div>B♭</div>
   </div>
   <div class="key white-key" id="b" onclick="playNote(493.88)">
     <div>B</div>
@@ -108,17 +111,21 @@
     <div>G</div>
   </div>
   <div class="key black-key" id="g-sharp" onclick="playNote(830.61)">
-    <div>G#</div>
+    <div>A♭</div>
   </div>
   <div class="key white-key" id="a" onclick="playNote(880.00)">
     <div>A</div>
   </div>
   <div class="key black-key" id="a-sharp" onclick="playNote(932.33)">
-    <div>A#</div>
+    <div>B♭</div>
   </div>
   <div class="key white-key" id="b" onclick="playNote(987.77)">
     <div>B</div>
   </div>
-  </div>
+  <div class="key white-key" id="c" onclick="playNote(1046.50)">
+    <div>C</div>
+  </div>  
+</main>
+
 </body>
 </html>
